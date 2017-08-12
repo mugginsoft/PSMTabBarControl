@@ -60,23 +60,6 @@
 	_gradientImage = [[NSImage alloc] initByReferencingFile:[[PSMTabBarControl bundle] pathForImageResource:@"AdiumGradient"]];
 }
 
-- (void)dealloc {
-	[_closeButton release];
-	[_closeButtonDown release];
-	[_closeButtonOver release];
-
-	[_closeDirtyButton release];
-	[_closeDirtyButtonDown release];
-	[_closeDirtyButtonOver release];
-
-	[_addTabButtonImage release];
-	[_addTabButtonPressedImage release];
-	[_addTabButtonRolloverImage release];
-
-	[_gradientImage release];
-
-	[super dealloc];
-}
 
 #pragma mark -
 #pragma mark Drawing Style Accessors
@@ -435,7 +418,6 @@
 			if([tabBarControl isWindowActive]) {
                 NSGradient *gradient = [[NSGradient alloc] initWithStartingColor:[NSColor colorWithCalibratedWhite:0.835 alpha:1.0] endingColor:[NSColor colorWithCalibratedWhite:0.843 alpha:1.0]];
                 [gradient drawInRect:rect angle:90.0];
-                [gradient release];
 			} else {
 				[[NSColor windowBackgroundColor] set];
 				NSRectFill(rect);
@@ -523,7 +505,6 @@
 	}
 	}
 
-	[shadow release];
 	[NSGraphicsContext restoreGraphicsState];
 }
 
@@ -558,7 +539,6 @@
                 
                     NSGradient *gradient = [[NSGradient alloc] initWithStartingColor:[NSColor colorWithCalibratedWhite:0.835 alpha:1.0] endingColor:[NSColor colorWithCalibratedWhite:0.843 alpha:1.0]];
                     [gradient drawInRect:aRect angle:90.0];
-                    [gradient release];                
 				} else {
 					[[NSColor windowBackgroundColor] set];
 					NSRectFill(aRect);
@@ -607,7 +587,6 @@
                 
                     NSGradient *gradient = [[NSGradient alloc] initWithStartingColor:[NSColor colorWithCalibratedWhite:0.835 alpha:1.0] endingColor:[NSColor colorWithCalibratedWhite:0.843 alpha:1.0]];
                     [gradient drawInRect:aRect angle:90.0];
-                    [gradient release];
 				} else {
 					[[NSColor windowBackgroundColor] set];
 					NSRectFill(aRect);
@@ -622,7 +601,6 @@
                 }
                 
                 [gradient drawInRect:aRect angle:0.0];
-                [gradient release];
 			}
 
 			// frame
@@ -680,7 +658,6 @@
 	}
 
 	[NSGraphicsContext restoreGraphicsState];
-	[shadow release];
 }
 
 - (void)drawIconOfTabCell:(PSMTabBarCell *)cell withFrame:(NSRect)frame inTabBarControl:(PSMTabBarControl *)tabBarControl {
@@ -742,15 +719,15 @@
 - (id)initWithCoder:(NSCoder *)aDecoder {
 	if((self = [super init])) {
 		if([aDecoder allowsKeyedCoding]) {
-			_closeButton = [[aDecoder decodeObjectForKey:@"closeButton"] retain];
-			_closeButtonDown = [[aDecoder decodeObjectForKey:@"closeButtonDown"] retain];
-			_closeButtonOver = [[aDecoder decodeObjectForKey:@"closeButtonOver"] retain];
-			_closeDirtyButton = [[aDecoder decodeObjectForKey:@"closeDirtyButton"] retain];
-			_closeDirtyButtonDown = [[aDecoder decodeObjectForKey:@"closeDirtyButtonDown"] retain];
-			_closeDirtyButtonOver = [[aDecoder decodeObjectForKey:@"closeDirtyButtonOver"] retain];
-			_addTabButtonImage = [[aDecoder decodeObjectForKey:@"addTabButtonImage"] retain];
-			_addTabButtonPressedImage = [[aDecoder decodeObjectForKey:@"addTabButtonPressedImage"] retain];
-			_addTabButtonRolloverImage = [[aDecoder decodeObjectForKey:@"addTabButtonRolloverImage"] retain];
+			_closeButton = [aDecoder decodeObjectForKey:@"closeButton"];
+			_closeButtonDown = [aDecoder decodeObjectForKey:@"closeButtonDown"];
+			_closeButtonOver = [aDecoder decodeObjectForKey:@"closeButtonOver"];
+			_closeDirtyButton = [aDecoder decodeObjectForKey:@"closeDirtyButton"];
+			_closeDirtyButtonDown = [aDecoder decodeObjectForKey:@"closeDirtyButtonDown"];
+			_closeDirtyButtonOver = [aDecoder decodeObjectForKey:@"closeDirtyButtonOver"];
+			_addTabButtonImage = [aDecoder decodeObjectForKey:@"addTabButtonImage"];
+			_addTabButtonPressedImage = [aDecoder decodeObjectForKey:@"addTabButtonPressedImage"];
+			_addTabButtonRolloverImage = [aDecoder decodeObjectForKey:@"addTabButtonRolloverImage"];
 			_drawsUnified = [aDecoder decodeBoolForKey:@"drawsUnified"];
 			_drawsRight = [aDecoder decodeBoolForKey:@"drawsRight"];
 		}
